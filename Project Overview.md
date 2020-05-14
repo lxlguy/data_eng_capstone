@@ -66,7 +66,7 @@ The write up describes a logical approach to this project under the following sc
 - A data dictionary for the final data model is included.
 - The data model is appropriate for the identified purpose.
 ##### Datasets
-The project includes:
+The project includes:  
 - At least 2 data sources
 - More than 1 million lines of data.
 - At least two data sources/formats (csv, api, json)
