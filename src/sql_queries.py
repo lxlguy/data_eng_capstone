@@ -1,15 +1,15 @@
-class socrata_class():
-    select_codes = """code,description,code_type,format_group,format_subgroup,category_group,category_subgroup,age_group"""
+# class socrata_class():
+#     select_codes = """code,description,code_type,format_group,format_subgroup,category_group,category_subgroup,age_group"""
     
-    code_df=code_df[["code", "description","code_type","format_group","format_subgroup","category_group","category_subgroup","age_group"]]
+#     code_df=code_df[["code", "description","code_type","format_group","format_subgroup","category_group","category_subgroup","age_group"]]
 
-    select_inventory = """bibnum, title,isbn, publicationyear, publisher, itemtype, itemcollection, floatingitem, itemlocation, reportdate, itemcount, author, subjects"""
+#     select_inventory = """bibnum, title,isbn, publicationyear, publisher, itemtype, itemcollection, floatingitem, itemlocation, reportdate, itemcount, author, subjects"""
 
-    inventory_df = inventory_df[["bibnum","title","isbn", "publicationyear", "publisher", "itemtype", "itemcollection", "floatingitem", "itemlocation", "reportdate", "itemcount", "author", "subjects"]]
+#     inventory_df = inventory_df[["bibnum","title","isbn", "publicationyear", "publisher", "itemtype", "itemcollection", "floatingitem", "itemlocation", "reportdate", "itemcount", "author", "subjects"]]
 
-    select_loans = """id, checkoutyear,bibnumber, itembarcode, itemtype,collection, callnumber, itemtitle, subjects, checkoutdatetime"""
+#     select_loans = """id, checkoutyear,bibnumber, itembarcode, itemtype,collection, callnumber, itemtitle, subjects, checkoutdatetime"""
 
-    loans_df=loans_df[["id", "checkoutyear","bibnumber", "itembarcode", "itemtype","collection", "callnumber", "itemtitle", "subjects", "checkoutdatetime"]]
+#     loans_df=loans_df[["id", "checkoutyear","bibnumber", "itembarcode", "itemtype","collection", "callnumber", "itemtitle", "subjects", "checkoutdatetime"]]
 
 class staging_tables():
     create_inventory_stg = """
