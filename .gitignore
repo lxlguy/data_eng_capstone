@@ -1,5 +1,5 @@
-# keys
-credentials.json
+#specific project files to be ignored
+*.json
 *.csv
 *.xlsx
 # Byte-compiled / optimized / DLL files
