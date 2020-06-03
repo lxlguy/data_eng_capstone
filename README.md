@@ -86,15 +86,27 @@ To standardise the values would require significant effort to clean up the text 
 ## Bridge Tables  
 I would be able to left outer join the fact table with the dim_subject using the bridge table as the intermediatary to get a count of the subjects that readers likes to read. I noticed in my EDA that the subjects field in the loan table is different from that of the subjects field in the inventory dataset, hence decided to standardise the subjects field by using the subjects field from inventory instead. MD5 hash is used to generate the subject_id_group.
 
+## ETL Process
+An overview of the tasks in Airflow is shown below:  
+<img src="./assets/dags.png" alt="Data Model" width="800"/>  
+The Monthly DAG can be executed at the end of each month, while the daily DAG should be ran at the end of each day.  
 
-## Improvements to be Made
+## Dashboard
 
-## Phases of work:
-2. database design
-- most likely a dimension/fact table design, relational DB not likely since my use case is probably analytical
-3. creating the relevant dimension tables
-- create prototype end use case
-4. setup airflow
-- submit to udacity for review
-5. expand use case development
-- want to integrate ML further
+
+
+## Further Scenarios to be explored:  
+Include a description of how you would approach the problem differently under the following scenarios:
+If the data was increased by 100x.
+I will scale up the Redshift cluster in both nodes and node type.
+
+If the pipelines were run on a daily basis by 7am.  
+Not applicable since the daily DAG is meant to be ran daily.
+
+If the database needed to be accessed by 100+ people.
+I will scale up the Redshift cluster. Currently accessing the data via the dashboard incurs an acceptable delay in the order of a few seconds (for Redshift to aggregate and send the required information over)
+
+## Improvements that could be made:  
+Additional fields could be added to the warehouse, however, I felt that it would incur too much time to design the ETL process to process the messy data.
+SubDAGs could be used to simply the download-upload_toS3 tasks.
+More data checks could be added.
