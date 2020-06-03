@@ -25,7 +25,7 @@ default_args = {
     'socrata_id' : 'socrata', 
 }
 
-drop_dag = DAG('Drop everything in redshift',
+drop_dag = DAG('Drop_everything_in_redshift',
           default_args=default_args,
           description='drop stuff',
           schedule_interval='30 23 * * *',

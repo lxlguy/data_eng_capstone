@@ -127,7 +127,7 @@ load_subject_dimension_table = LoadDataOperator(
     dag=monthly_dag,
     table = "dim_subject",
     sql_stmt_create = dim_tables.create_dim_subject,
-    sql_stmt_load = dim_tables.insert_dim_subject2,
+    sql_stmt_load = dim_tables.insert_dim_subject,
     truncate_existing_table = False)
 
 load_bridge_table = LoadDataOperator(
@@ -135,14 +135,14 @@ load_bridge_table = LoadDataOperator(
     dag=monthly_dag,
     table = "bridge_subject",
     sql_stmt_create = bridge_link.create_bridge_subjects,
-    sql_stmt_load = bridge_link.insert_bridge_subjects3,
+    sql_stmt_load = bridge_link.insert_bridge_subjects,
     truncate_existing_table = False)
 
 check_dimension_tables = DataQualityOperator(
-    task_id='Check that dim_tables are populated',
+    task_id='Check_that_dim_tables_are_populated',
     dag=monthly_dag,
-    queries = ["select count(*) from dim_books","select count(*) from dim_collections"}.\
-                "query":"select count(*) from bridge_subject"},"query":"select count(*) from dim_subject"]
+    queries = ["select count(*) from dim_books","select count(*) from dim_collections",\
+                "select count(*) from bridge_subject","select count(*) from dim_subject"]
 )
 
 start_operator >> download_code >> upload_code_to_s3 >> stage_code_to_redshift >> load_collection_dimension_table
