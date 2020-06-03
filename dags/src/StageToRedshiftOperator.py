@@ -8,6 +8,30 @@ from airflow.contrib.hooks.aws_hook import AwsHook
 
 class StageToRedshiftOperator(BaseOperator):
     
+    """"
+    1. create staging table if not exist
+    2. truncate staging table if needed
+    3. Copies file from s3 storage to staging tables. 
+    
+    param redshift_conn_id: location of the connection detail in Airflow Connections
+    type redshift_conn_id: str
+
+    param target_table: table to be modified
+    type target_table: str
+
+    param aws_login: location of the connection detail in Airflow Connections
+    type aws_login: str
+
+    param s3_bucket: s3 bucket name to copy from
+    type s3_bucket: str
+
+    param s3_key: key of file to be copied
+    type s3_key: str
+
+    param create_statement: custom sql to create table, different for each table
+    type create_statement:str
+    """
+
     template_fields = ("s3_key",)
        
     copy_table_sql = """

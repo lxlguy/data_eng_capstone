@@ -8,6 +8,36 @@ from airflow.contrib.hooks.aws_hook import AwsHook
 import pandas as pd
 
 class ManipulateInventoryOperator(BaseOperator):
+    
+    """"
+    For the inventory dataset downloaded, subset only the subjects column and split the comma 
+    separated values into individual rows such that:
+    original column
+    subjects
+    A,B,C,D,E
+
+    becomes 
+    subjects    subject
+    A,B,C,D,E   A
+    A,B,C,D,E   B
+    A,B,C,D,E   C
+    A,B,C,D,E   D
+    A,B,C,D,E   E
+
+    to enable the bridge table
+    This is done with pandas as a google search of and experimentation of Redshift functions 
+    does not yield anything promising.
+
+    param date: date of file to be retrieved
+    type date: datetime
+
+    param read_file_path: location of file
+    type read_file_path: str
+
+    param write_file_path: where to write the output df prior to upload
+    type write_file_path: str
+    """
+    
     template_fields = ("date",)
 
     def tidy_split(self,df, column, new_column, sep=',', keep=False):

@@ -89,10 +89,21 @@ I would be able to left outer join the fact table with the dim_subject using the
 ## ETL Process
 An overview of the tasks in Airflow is shown below:  
 <img src="./assets/dags.png" alt="Data Model" width="800"/>  
-The Monthly DAG can be executed at the end of each month, while the daily DAG should be ran at the end of each day.  
+The Monthly DAG can be executed at the end of each month, while the daily DAG should be ran at the end of each day.   
+
+
+## Operators
+Explanation of the purpose of each Operator in Airflow used is in the docstrings
+
+## Airflow dashboard  
+The tasks run smoothly in general and each daily DAG needs an average of 3 minutes to run. There is a daily run that failed because that day was Memorial Day 2018, and the library has no data that day.  
+<img src="./assets/airflow daily dag.png" alt="Data Model" width="600"/>  
+Each monthly DAG needs about 5 minutes to run, partially due to the larger volume to download from Socrata.
+<img src="./assets/airflow_monthly.png" alt="Data Model" width="600"/>  
 
 ## Dashboard
-
+A screenshot of the application dashboard is shown below. The user could make changes to the data and the dashboard will update the query to Redshift. Updates will take a couple of seconds to effect.  
+<img src="./assets/dashboard.png" alt="Data Model" width="600"/> 
 
 
 ## Further Scenarios to be explored:  
@@ -110,3 +121,6 @@ I will scale up the Redshift cluster. Currently accessing the data via the dashb
 Additional fields could be added to the warehouse, however, I felt that it would incur too much time to design the ETL process to process the messy data.
 SubDAGs could be used to simply the download-upload_toS3 tasks.
 More data checks could be added.
+
+## Lessons learnt  
+In this Nanodegree, I've learned more about database/warehouse design, Spark and Airflow and have deepened my understanding in SQL through the writing of more complex queries to store the information. Although I am not looking to break into the data engineer role, I believe that understanding how data is collected, stored would help me more in the future in Data Science.

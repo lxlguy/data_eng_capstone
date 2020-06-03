@@ -7,6 +7,22 @@ from airflow.hooks.postgres_hook import PostgresHook
 from airflow.contrib.hooks.aws_hook import AwsHook
 
 class UploadDataOperator(BaseOperator):
+    """"
+    Uploads data from local to s3
+    
+    param aws_id: location of the connection detail in Airflow Connections
+    type aws_id: str
+
+    param file_path: location of save file
+    type file_path: valid path location str
+
+    param date: date (forms part of file name of file to be uploaded)
+    type date: datetime (templated)
+
+    param bucket_name: bucket name of s3 bucket
+    type bucket_name: str
+    """
+    
     template_fields = ("date",)
     
     @apply_defaults

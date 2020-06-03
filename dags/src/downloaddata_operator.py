@@ -7,6 +7,28 @@ import pandas as pd
 import os
 
 class DownloadDataOperator(BaseOperator):
+    """"
+    Downloads data from the Seattle Open Data Portal. Saves the downloaded data to local storage
+    
+    param socrata_id: location of the connection detail in Airflow Connections
+    type socrata_id: str
+
+    param db_name: code of the database to download from
+    type db_name: str
+
+    param params: the parameters of the SoQL query to make for Socrata
+    type params: dict{str:str}
+
+    param date: date to name file downloaded
+    type date: datetime(templaeted)
+
+    param file_path: location of save file
+    type file_path: valid path location str
+
+    param limits: the amount of rows to download per GET request
+    type limits: int
+    """
+    
     template_fields = ("date","params")
     
     @apply_defaults
@@ -48,7 +70,7 @@ class DownloadDataOperator(BaseOperator):
         while counter < target_count:
             results = client.get(db_string, limit=self.limits, offset=counter, **self.params)
             temp_df = pd.DataFrame.from_records(results)                        
-            if len(df)<1:
+            if len(temp_df)<1:
                 raise Exception ("No data has been downloaded")
             if 'select' in self.params:
                 order_cond = self.params['select'].split(',')
@@ -57,7 +79,8 @@ class DownloadDataOperator(BaseOperator):
             all_df.append(temp_df)
             counter+=self.limits            
         master_df = pd.concat(all_df)
-        save_file_path = os.path.join(self.file_path,'{}_{}.csv'.format(self.database, self.date))   
-        os.makedirs(save_file_path, exist_ok=True)
+        os.makedirs(self.file_path, exist_ok=True)
+        
+        save_file_path = os.path.join(self.file_path,'{}_{}.csv'.format(self.database, self.date))           
         master_df.to_csv(save_file_path, sep='|', index=False)
         self.log.info("{} records saved in {}".format(len(master_df), save_file_path))

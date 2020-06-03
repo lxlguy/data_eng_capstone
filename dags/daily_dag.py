@@ -13,11 +13,11 @@ from src.DropTableOperator import DropTableOperator
 
 
 default_args = {
-    'start_date': datetime(2018, 4, 1),
+    'start_date': datetime(2018, 5, 20),
     'email_on_retry': False,
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
-    'end_date': datetime(2018, 5, 31),
+    'end_date': datetime(2018, 6, 5),
     'depends_on_past': False,
     'redshift_conn_id': 'redshift',
     'aws_login': 'aws_credentials',
